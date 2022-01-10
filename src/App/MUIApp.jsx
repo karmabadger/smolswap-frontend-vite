@@ -1,14 +1,23 @@
-import { useState, useContext } from 'react'
-import logo from './logo.svg'
-import './App.css'
+import { useContext } from 'react'
+
+import { ThemeProvider } from '@mui/styles';
+import { createTheme } from '@mui/material/styles';
 
 import { handleConnect } from '../utils/wallet/web3wallet'
 
 import WalletContext from './components/context/WalletContext/WalletContext'
 import CartContext from './components/context/CartContext/CartContext'
 
-import { Routes, Route, Link } from "react-router-dom";
+import { Routes, Route, Link, Navigate } from "react-router-dom";
 import Collections from './routes/Collections'
+import Checkout from './routes/Checkout'
+
+import Navbar from './components/Navbar/Navbar'
+
+// const theme = createTheme();
+const theme = createTheme({
+    palette: { text: { hint: 'rgba(0, 0, 0, 0.38)' } }
+});
 
 function MUIApp() {
 
@@ -28,27 +37,16 @@ function MUIApp() {
 
     return (
         <div className="MUIApp">
-            {/* <header className="App-header">
-                <img src={logo} className="App-logo" alt="logo" />
-                <p>
-                    <button type="button" onClick={handleConnectWallet}>
-                        connect
-                    </button>
-                </p>
-                <button type="button" onClick={printSigner}>
-                    info
-                </button>
-
-            </header> */}
-
-            <Switch>
-                <Route path="/">
-                    
-                </Route>
-                <Route path="/collections">
-                    <Collections />
-                </Route>
-            </Switch>
+            <ThemeProvider theme={theme}>
+                <Navbar />
+                <Routes>
+                    <Route exact path="/" element={<Navigate to="/collection/smolbrains" replace />} />
+                    <Route path="/collection"  >
+                        <Route path=":collectionName" element={<Collections />} />
+                    </Route>
+                    <Route path="/checkout" element={<Checkout />} />
+                </Routes>
+            </ThemeProvider>
         </div>
     )
 }

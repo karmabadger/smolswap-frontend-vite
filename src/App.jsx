@@ -3,7 +3,7 @@ import { useState } from 'react'
 
 import MUIApp from './App/MUIApp'
 
-import { web3Modal, handleConnect } from './utils/wallet/web3wallet.js';
+import { web3Modal } from './utils/wallet/web3wallet.js';
 
 import WalletContextProvider from './App/components/context/WalletContext/WalletContextProvider';
 
