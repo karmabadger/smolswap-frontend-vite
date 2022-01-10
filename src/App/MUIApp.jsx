@@ -2,6 +2,8 @@ import { useContext } from 'react'
 
 import { ThemeProvider } from '@mui/styles';
 import { createTheme } from '@mui/material/styles';
+import CssBaseline from '@mui/material/CssBaseline';
+import Toolbar from '@mui/material/Toolbar';
 
 import { handleConnect } from '../utils/wallet/web3wallet'
 
@@ -38,7 +40,9 @@ function MUIApp() {
     return (
         <div className="MUIApp">
             <ThemeProvider theme={theme}>
+                <CssBaseline />
                 <Navbar />
+                <Toolbar />
                 <Routes>
                     <Route exact path="/" element={<Navigate to="/collection/smolbrains" replace />} />
                     <Route path="/collection"  >
