@@ -2,40 +2,24 @@ import { useState } from 'react'
 
 
 import { styled, useTheme, alpha } from "@mui/material/styles";
-import Box from "@mui/material/Box";
 import Toolbar from "@mui/material/Toolbar";
 import IconButton from "@mui/material/IconButton";
 import Typography from "@mui/material/Typography";
-import Badge from "@mui/material/Badge";
-import MenuItem from "@mui/material/MenuItem";
-import Menu from "@mui/material/Menu";
 import MenuIcon from "@mui/icons-material/Menu";
-import SearchIcon from "@mui/icons-material/Search";
-import AccountCircle from "@mui/icons-material/AccountCircle";
-import MailIcon from "@mui/icons-material/Mail";
-import NotificationsIcon from "@mui/icons-material/Notifications";
-import MoreIcon from "@mui/icons-material/MoreVert";
 
-import Drawer from "@mui/material/Drawer";
-import CssBaseline from "@mui/material/CssBaseline";
 import MuiAppBar from "@mui/material/AppBar";
-import List from "@mui/material/List";
-import Divider from "@mui/material/Divider";
-import ChevronLeftIcon from "@mui/icons-material/ChevronLeft";
-import ChevronRightIcon from "@mui/icons-material/ChevronRight";
-import ListItem from "@mui/material/ListItem";
-import ListItemIcon from "@mui/material/ListItemIcon";
-import ListItemText from "@mui/material/ListItemText";
-import InboxIcon from "@mui/icons-material/MoveToInbox";
-
 
 // import SearchBar from "./LeftSide/SearchBar/SearchBar.jsx";
 // import Title from "./Title/Title.jsx";
 // import CartButton from "./Buttons/CartButton.jsx";
 // import ConnectButton from "./Buttons/ConnectButton.jsx";
 
-const drawerWidth = 240;
 
+import NavbarDrawer from './Drawer/NavbarDrawer';
+import ConnectButton from './ConnectButton/ConnectButton';
+
+
+const drawerWidth = 240;
 
 const AppBar = styled(MuiAppBar, {
     shouldForwardProp: (prop) => prop !== "open"
@@ -54,14 +38,7 @@ const AppBar = styled(MuiAppBar, {
     })
 }));
 
-const DrawerHeader = styled("div")(({ theme }) => ({
-    display: "flex",
-    alignItems: "center",
-    padding: theme.spacing(0, 1),
-    // necessary for content to be below app bar
-    ...theme.mixins.toolbar,
-    justifyContent: "flex-end"
-}));
+
 
 
 export default function topbar({ }) {
@@ -79,7 +56,7 @@ export default function topbar({ }) {
 
     return (
         <div>
-            <AppBar position="fixed" open={open} >
+            <AppBar position="fixed" >
                 <Toolbar>
                     <IconButton
                         color="inherit"
@@ -91,54 +68,12 @@ export default function topbar({ }) {
                         <MenuIcon />
                     </IconButton>
 
+                    <ConnectButton />
                 </Toolbar>
+
             </AppBar>
 
-            <Drawer
-                sx={{
-                    width: drawerWidth,
-                    flexShrink: 0,
-                    "& .MuiDrawer-paper": {
-                        width: drawerWidth,
-                        boxSizing: "border-box"
-                    }
-                }}
-                variant="persistent"
-                anchor="left"
-                open={open}
-            >
-                <DrawerHeader>
-                    <IconButton onClick={handleDrawerClose}>
-                        {theme.direction === "ltr" ? (
-                            <ChevronLeftIcon />
-                        ) : (
-                            <ChevronRightIcon />
-                        )}
-                    </IconButton>
-                </DrawerHeader>
-                <Divider />
-                <List>
-                    {["Inbox", "Starred", "Send email", "Drafts"].map((text, index) => (
-                        <ListItem button key={text}>
-                            <ListItemIcon>
-                                {index % 2 === 0 ? <InboxIcon /> : <MailIcon />}
-                            </ListItemIcon>
-                            <ListItemText primary={text} />
-                        </ListItem>
-                    ))}
-                </List>
-                <Divider />
-                <List>
-                    {["All mail", "Trash", "Spam"].map((text, index) => (
-                        <ListItem button key={text}>
-                            <ListItemIcon>
-                                {index % 2 === 0 ? <InboxIcon /> : <MailIcon />}
-                            </ListItemIcon>
-                            <ListItemText primary={text} />
-                        </ListItem>
-                    ))}
-                </List>
-            </Drawer>
+            <NavbarDrawer handleDrawerClose={handleDrawerClose} open={open} drawerWidth={drawerWidth} />
 
 
         </div>
