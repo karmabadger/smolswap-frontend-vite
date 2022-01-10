@@ -4,20 +4,14 @@ import { useState } from 'react'
 import { styled, useTheme, alpha } from "@mui/material/styles";
 import Toolbar from "@mui/material/Toolbar";
 import IconButton from "@mui/material/IconButton";
-import Typography from "@mui/material/Typography";
 import MenuIcon from "@mui/icons-material/Menu";
+import Typography from "@mui/material/Typography";
 
 import MuiAppBar from "@mui/material/AppBar";
 
-// import SearchBar from "./LeftSide/SearchBar/SearchBar.jsx";
-// import Title from "./Title/Title.jsx";
-// import CartButton from "./Buttons/CartButton.jsx";
-// import ConnectButton from "./Buttons/ConnectButton.jsx";
-
-
+import RightSideBox from './RightSide/RightSideBox';
+import LeftSideBox from './LeftSide/LeftSideBox';
 import NavbarDrawer from './Drawer/NavbarDrawer';
-import ConnectButton from './ConnectButton/ConnectButton';
-
 
 const drawerWidth = 240;
 
@@ -68,14 +62,13 @@ export default function topbar({ }) {
                         <MenuIcon />
                     </IconButton>
 
-                    <ConnectButton />
+                    <LeftSideBox handleDrawerOpen={handleDrawerOpen} open={open} />
+                    <RightSideBox />
                 </Toolbar>
 
             </AppBar>
 
             <NavbarDrawer handleDrawerClose={handleDrawerClose} open={open} drawerWidth={drawerWidth} />
-
-
         </div>
     );
 }
