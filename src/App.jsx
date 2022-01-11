@@ -1,5 +1,7 @@
 import { useState } from 'react'
 
+import { ThemeProvider } from '@mui/material/styles';
+import theme from './App/mui/theme/theme';
 
 import MUIApp from './App/MUIApp'
 
@@ -13,14 +15,16 @@ function App() {
     const [signer, setSigner] = useState(null);
 
     return (
-        <div className="App">
-            <WalletContextProvider web3Modal={web3Modal} signer={signer} setSigner={setSigner}
-                childrenEl={
-                    <CartContextProvider childrenEl={
-                        <MUIApp />
+        <ThemeProvider theme={theme}>
+            <div className="App">
+                <WalletContextProvider web3Modal={web3Modal} signer={signer} setSigner={setSigner}
+                    childrenEl={
+                        <CartContextProvider childrenEl={
+                            <MUIApp inputTheme={theme} />
+                        } />
                     } />
-                } />
-        </div>
+            </div>
+        </ThemeProvider>
     )
 }
 

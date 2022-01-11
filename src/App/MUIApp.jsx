@@ -1,8 +1,9 @@
 import { useContext } from 'react'
 
-import { ThemeProvider } from '@mui/styles';
-import { createTheme } from '@mui/material/styles';
+
+import { createTheme, styled, useTheme, alpha } from '@mui/material/styles';
 import CssBaseline from '@mui/material/CssBaseline';
+import Button from '@mui/material/Button';
 import Toolbar from '@mui/material/Toolbar';
 
 import { handleConnect } from '../utils/wallet/web3wallet'
@@ -16,14 +17,12 @@ import Checkout from './routes/Checkout'
 
 import Navbar from './components/Navbar/Navbar'
 
-// const theme = createTheme();
-const theme = createTheme({
-    palette: { text: { hint: 'rgba(0, 0, 0, 0.38)' } }
-});
 
-function MUIApp() {
+function MUIApp({ inputTheme }) {
 
-    const { web3Modal, signer, setSigner } = useContext(WalletContext);
+    const { signer, setSigner } = useContext(WalletContext);
+
+    const theme = useTheme()
 
     const cartContextObj = useContext(CartContext);
 
@@ -37,20 +36,22 @@ function MUIApp() {
         console.log(cartContextObj);
     }
 
+    const printTheme = () => {
+        console.log(theme, inputTheme);
+    }
+
     return (
         <div className="MUIApp">
-            <ThemeProvider theme={theme}>
-                <CssBaseline />
-                <Navbar />
-                <Toolbar />
-                <Routes>
-                    <Route exact path="/" element={<Navigate to="/collection/smolbrains" replace />} />
-                    <Route path="/collection"  >
-                        <Route path=":collectionName" element={<Collections />} />
-                    </Route>
-                    <Route path="/checkout" element={<Checkout />} />
-                </Routes>
-            </ThemeProvider>
+            <Navbar />
+            <Toolbar />
+            <Button variant="contained" color='primary' onClick={printTheme}>Theme</Button>
+            <Routes>
+                <Route exact path="/" element={<Navigate to="/collection/smolbrains" replace />} />
+                <Route path="/collection"  >
+                    <Route path=":collectionName" element={<Collections />} />
+                </Route>
+                <Route path="/checkout" element={<Checkout />} />
+            </Routes>
         </div>
     )
 }

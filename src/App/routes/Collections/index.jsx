@@ -18,17 +18,43 @@ const Collections = (props) => {
 
     return (
         <Container>
-            <Box sx={{ my: 2 }}>
-                {[...new Array(120)]
+            <Box sx={{ my: 0, display: 'flex', flexDirection: 'column', alignItems: 'center', gap: "48px" }}>
+                {/* {[...new Array(120)]
                     .map(
                         () => `Cras mattis consectetur purus sit amet fermentum.
 Cras justo odio, dapibus ac facilisis in, egestas eget quam.
 Morbi leo risus, porta ac consectetur ac, vestibulum at eros.
 Praesent commodo cursus magna, vel scelerisque nisl consectetur et.`,
                     )
-                    .join('\n')}
+                    .join('\n')} */}
+
+                <Box sx={{ height: "56px", marginTop: "48px" }}>
+                    <Typography variant="h3" align='center'>Smol Brains</Typography>
+                </Box>
+
+                <Box sx={{ backgroundColor: "yellow", width: "228px", height: "64px", display: 'flex', flexDirection: "row", gap: "48px" }}>
+
+
+                    <Box sx={{ margin: "0px" }}>
+                        <Typography variant="h6">
+                            Floor price
+                        </Typography>
+                        <Typography variant="body1">
+                            3,200 $MAGIC
+                        </Typography>
+                    </Box>
+                    <Box sx={{ margin: "0px" }}>
+                        <Typography variant="h6">
+                            Floor price
+                        </Typography>
+                        <Typography variant="body1">
+                            3,200 $MAGIC
+                        </Typography>
+                    </Box>
+
+                </Box>
             </Box>
-        </Container>
+        </Container >
     )
 }
 
