@@ -44,7 +44,6 @@ function MUIApp({ inputTheme }) {
         <div className="MUIApp">
             <Navbar />
             <Toolbar />
-            <Button variant="contained" color='primary' onClick={printTheme}>Theme</Button>
             <Routes>
                 <Route exact path="/" element={<Navigate to="/collection/smolbrains" replace />} />
                 <Route path="/collection"  >
