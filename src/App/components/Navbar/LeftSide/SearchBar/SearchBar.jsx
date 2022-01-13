@@ -1,9 +1,17 @@
+import { useState, useEffect, useRef } from "react";
+
 import SearchIcon from "@mui/icons-material/Search";
 import { styled, useTheme, alpha } from "@mui/material/styles";
 import InputBase from "@mui/material/InputBase";
+import ClickAwayListener from '@mui/material/ClickAwayListener';
+import Popper from '@mui/material/Popper';
+import Box from '@mui/material/Box';
+import Typography from '@mui/material/Typography';
+import VirtualizedList from "./VirtualizedList/VirtualizedList";
+
 
 const Search = styled("div")(({ theme }) => ({
-    maxWidth: "600px",
+    maxWidth: "800px",
     flexGrow: 1,
     position: "relative",
     borderRadius: theme.shape.borderRadius,
@@ -32,6 +40,7 @@ const SearchIconWrapper = styled("div")(({ theme }) => ({
 
 const StyledInputBase = styled(InputBase)(({ theme }) => ({
     color: "inherit",
+    width: "100%",
     "& .MuiInputBase-input": {
         padding: theme.spacing(1, 1, 1, 0),
         // vertical padding + font size from searchIcon
@@ -44,16 +53,54 @@ const StyledInputBase = styled(InputBase)(({ theme }) => ({
     }
 }));
 
+const StyledPopper = styled(Popper)(({ theme }) => ({
+    zIndex: theme.zIndex.modal
+}));
+
 export default function ({ }) {
+    const [anchorEl, setAnchorEl] = useState(null);
+    const [open, setOpen] = useState(false);
+
+    const theme = useTheme();
+
+    const handleClick = (event) => {
+        setOpen(true);
+        setAnchorEl(event.currentTarget);
+    };
+
+    const handleOnClickAway = (e) => {
+        setOpen(false);
+    };
+
+    const id = open ? 'simple-popper' : undefined;
+
     return (
         <Search>
-            <SearchIconWrapper>
-                <SearchIcon />
-            </SearchIconWrapper>
-            <StyledInputBase
-                placeholder="Search Collection…"
-                inputProps={{ "aria-label": "search" }}
-            />
+            <ClickAwayListener onClickAway={handleOnClickAway}>
+                <Box
+                    sx={{
+                        width: "100%",
+                        height: "100%",
+                    }}>
+                    <SearchIconWrapper>
+                        <SearchIcon />
+                    </SearchIconWrapper>
+                    <StyledInputBase
+                        placeholder="Search Collection…"
+                        inputProps={{ "aria-label": "search" }}
+                        onClick={handleClick}
+                    />
+                    <StyledPopper
+                        id={id}
+                        open={open}
+                        anchorEl={anchorEl}
+                        placement="bottom-start"
+                        elevation={24}
+                    >
+                        <VirtualizedList />
+                    </StyledPopper>
+                </Box>
+            </ClickAwayListener>
         </Search>
     )
 }

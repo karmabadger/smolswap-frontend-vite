@@ -84,9 +84,9 @@ const Collections = (props) => {
                             </Typography>
                         </Box>
                         <Box id="search-chips-box" sx={{ display: "flex", flexDirection: "row", gap: "8px" }}>
-                            <Chip label="Deletable" onDelete={() => { console.info('You clicked the delete icon.'); }} />
-                            <Chip label="Deletable" onDelete={() => { console.info('You clicked the delete icon.'); }} />
-                            <Chip label="Deletable" onDelete={() => { console.info('You clicked the delete icon.'); }} />
+                            <Chip label="Deletable" color="secondary" onDelete={() => { console.info('You clicked the delete icon.'); }} />
+                            <Chip label="Deletable" color="secondary" onDelete={() => { console.info('You clicked the delete icon.'); }} />
+                            <Chip label="Deletable" color="secondary" onDelete={() => { console.info('You clicked the delete icon.'); }} />
                         </Box>
                     </Box>
                     <Box id="collection-grid-main-box">

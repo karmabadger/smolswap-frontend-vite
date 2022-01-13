@@ -13,7 +13,7 @@ import RightSideBox from './RightSide/RightSideBox';
 import LeftSideBox from './LeftSide/LeftSideBox';
 import NavbarDrawer from './Drawer/NavbarDrawer';
 
-const drawerWidth = 240;
+const drawerWidth = 350;
 
 const AppBar = styled(MuiAppBar, {
     shouldForwardProp: (prop) => prop !== "open"
