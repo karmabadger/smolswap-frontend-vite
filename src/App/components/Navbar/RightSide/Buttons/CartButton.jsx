@@ -5,7 +5,10 @@ import ShoppingCartIcon from "@mui/icons-material/ShoppingCart";
 
 const CartButton = ({ connected }) => {
     return (
-        <IconButton aria-label="shopping cart checkout" sx={{ p: "12px", mx: "5px" }}>
+        <IconButton
+            disabled={!connected}
+            color="secondary"
+            aria-label="shopping cart checkout" sx={{ p: "12px", mx: "5px" }}>
             <ShoppingCartIcon />
         </IconButton>
     )

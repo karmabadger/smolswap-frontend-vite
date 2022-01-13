@@ -7,7 +7,7 @@ import Button from '@mui/material/Button';
 import Toolbar from '@mui/material/Toolbar';
 import Box from '@mui/material/Box';
 
-import { handleConnect } from '../utils/wallet/web3wallet'
+// import { handleConnect } from '../utils/wallet/web3wallet'
 
 import WalletContext from './components/context/WalletContext/WalletContext'
 import CartContext from './components/context/CartContext/CartContext'
@@ -21,7 +21,6 @@ import Checkout from './routes/Checkout'
 import Navbar from './components/Navbar/Navbar'
 import Footer from './components/Footer/Footer';
 
-
 function MUIApp({ inputTheme }) {
 
     const { signer, setSigner } = useContext(WalletContext);
@@ -30,10 +29,10 @@ function MUIApp({ inputTheme }) {
 
     const cartContextObj = useContext(CartContext);
 
-    const handleConnectWallet = async () => {
-        const newSigner = await handleConnect();
-        setSigner(newSigner);
-    }
+    // const handleConnectWallet = async () => {
+    //     const newSigner = await handleConnect();
+    //     setSigner(newSigner);
+    // }
 
     const printSigner = () => {
         console.log(signer);
@@ -54,6 +53,7 @@ function MUIApp({ inputTheme }) {
                     <Route path=":collectionName" element={<Collections />} />
                 </Route>
                 <Route path="/checkout" element={<Checkout />} />
+                {/* <Route path="/*" element={} /> */}
             </Routes>
 
             <Footer />
