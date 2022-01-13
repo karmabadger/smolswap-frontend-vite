@@ -8,6 +8,8 @@ import SearchIcon from '@mui/icons-material/Search';
 import InputAdornment from '@mui/material/InputAdornment';
 import TextField from '@mui/material/TextField';
 
+import { styled, useTheme, alpha } from "@mui/material/styles";
+
 import { VariableSizeList } from 'react-window';
 
 const getItemSize = (index) => {
@@ -16,8 +18,15 @@ const getItemSize = (index) => {
 function renderRow(props) {
     const { index, style } = props;
 
+    const theme = useTheme();
+
     return (
-        <ListItem style={style} key={index} component="div" disablePadding>
+        <ListItem
+            // style={style} 
+            sx={{
+                width: '478px',
+            }}
+            key={index} component="div" disablePadding>
             <ListItemButton>
                 <ListItemText primary={`Item ${index + 1}`} />
             </ListItemButton>
@@ -25,27 +34,33 @@ function renderRow(props) {
     );
 }
 
-function VirtualizedList() {
+const StyledBox = styled(Box)(({ theme }) => ({
+    zIndex: theme.zIndex.modal
+}));
+
+function VirtualizedList({ widthValue }) {
+    console.log('widthValue: ', widthValue);
+    const theme = useTheme();
     return (
-        <Box
+        <StyledBox
             style={{ margin: '0px' }}
             sx={{
                 margin: '0px',
-                width: '400px',
-                height: 400,
                 bgcolor: 'background.paper',
+                zIndex: theme.zIndex.modal
             }}
         >
             <VariableSizeList
                 height={400}
-                width="100%"
+                width={widthValue}
                 itemSize={getItemSize}
                 itemCount={200}
+
             // overscanCount={5}
             >
                 {renderRow}
             </VariableSizeList>
-        </Box>
+        </StyledBox>
     );
 }
 

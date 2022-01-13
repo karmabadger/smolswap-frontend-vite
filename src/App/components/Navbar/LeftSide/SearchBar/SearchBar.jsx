@@ -58,6 +58,8 @@ const StyledPopper = styled(Popper)(({ theme }) => ({
 }));
 
 export default function ({ }) {
+
+
     const [anchorEl, setAnchorEl] = useState(null);
     const [open, setOpen] = useState(false);
 
@@ -66,16 +68,24 @@ export default function ({ }) {
     const handleClick = (event) => {
         setOpen(true);
         setAnchorEl(event.currentTarget);
+        console.log("width", ref.current.offsetWidth);
     };
 
     const handleOnClickAway = (e) => {
         setOpen(false);
     };
 
+    const ref = useRef(null);
+
+    useEffect(() => {
+        console.log("width", ref.current.offsetWidth);
+    }, [ref]);
+
+
     const id = open ? 'simple-popper' : undefined;
 
     return (
-        <Search>
+        <Search ref={ref}>
             <ClickAwayListener onClickAway={handleOnClickAway}>
                 <Box
                     sx={{
@@ -96,8 +106,34 @@ export default function ({ }) {
                         anchorEl={anchorEl}
                         placement="bottom-start"
                         elevation={24}
+                        // placement="bottom-start"
+                        disablePortal={false}
+                        modifiers={[
+                            {
+                                name: 'flip',
+                                enabled: true,
+                                options: {
+                                    altBoundary: true,
+                                    rootBoundary: 'document',
+                                    padding: 8,
+                                },
+                            },
+                            {
+                                name: 'preventOverflow',
+                                enabled: true,
+                                options: {
+                                    altAxis: true,
+                                    altBoundary: true,
+                                    tether: true,
+                                    rootBoundary: 'viewport',
+                                    padding: 8,
+                                },
+                            },
+                        ]}
+
+
                     >
-                        <VirtualizedList />
+                        <VirtualizedList widthValue={ref.current ? (ref.current.offsetWidth) : (0)} />
                     </StyledPopper>
                 </Box>
             </ClickAwayListener>
