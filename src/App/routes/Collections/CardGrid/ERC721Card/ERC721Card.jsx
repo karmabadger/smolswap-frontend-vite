@@ -1,6 +1,6 @@
 import Box from '@mui/material/Box';
 
-import MediumCard from './Medium/MediumCard';
+import MediumCard from './Cards/MediumCard';
 
 const ERC721Card = () => {
     return (

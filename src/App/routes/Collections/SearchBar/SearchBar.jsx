@@ -13,7 +13,7 @@ import { VariableSizeList } from 'react-window';
 import VirtualizedList from './VirtualizedList/VirtualizedList';
 
 
-const SearchBar = () => {
+const SearchBar = ({ searchList, setSearchList }) => {
     const options = [
         { title: 'The Shawshank Redemption', year: 1994 },
         { title: 'The Godfather', year: 1972 },
@@ -30,8 +30,16 @@ const SearchBar = () => {
         setOpen(true);
     };
     const handleClickAway = () => {
-        // console.log('closing..');
+        console.log('closing..');
         setOpen(false);
+    };
+
+    const handleOnKeyPressed = (e) => {
+        if (e.key === 'Enter') {
+            e.preventDefault();
+            setSearchList(searchList.concat(e.target.value));
+            console.log('enter', e.target.value);
+        }
     };
 
 
@@ -51,7 +59,7 @@ const SearchBar = () => {
                         width: '100%',
                     }}
                     noValidate
-                    autoComplete="off"
+                // autoComplete="off"
                 >
                     <TextField
                         sx={{ margin: '0px', width: '100%' }}
@@ -70,8 +78,9 @@ const SearchBar = () => {
                         }}
                         onClick={handleOnClick}
                         placeholder="Enter an ID or search term..."
+                        onKeyPress={handleOnKeyPressed}
                     />
-                    {open ? <VirtualizedList /> : null}
+                    {/* {open ? <VirtualizedList /> : null} */}
                 </Box>
             </ClickAwayListener>
         </Box>

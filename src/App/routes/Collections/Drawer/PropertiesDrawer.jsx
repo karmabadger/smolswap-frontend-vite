@@ -23,11 +23,16 @@ import AccordionSummary from '@mui/material/AccordionSummary';
 import AccordionDetails from '@mui/material/AccordionDetails';
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 
-const drawerWidth = 330;
+import FormControl from '@mui/material/FormControl';
+import FormGroup from '@mui/material/FormGroup';
+import FormControlLabel from '@mui/material/FormControlLabel';
+import FormHelperText from '@mui/material/FormHelperText';
+import Checkbox from '@mui/material/Checkbox';
 
 
 
-function PropertiesDrawer({ }) {
+
+function PropertiesDrawer({ drawerWidth, drawerMinWidth }) {
     // const theme = useTheme();
     const [open, setOpen] = useState(false);
 
@@ -40,6 +45,12 @@ function PropertiesDrawer({ }) {
         setOpen(false);
     };
 
+    const handleChange = (event) => {
+        // setState({
+        //     ...state,
+        //     [event.target.name]: event.target.checked,
+        // });
+    };
 
     const sections = [
         1, 2, 3, 4, 5, 6
@@ -47,7 +58,7 @@ function PropertiesDrawer({ }) {
 
     return (
         <Box>
-            <Collapse sx={{ m: "0px" }} orientation="horizontal" in={open} collapsedSize={56}>
+            <Collapse sx={{ m: "0px" }} orientation="horizontal" in={open} collapsedSize={drawerMinWidth}>
                 <Box sx={{ m: 0, height: "100%" }}
                     elevation={4}>
                     <Box
@@ -66,7 +77,8 @@ function PropertiesDrawer({ }) {
                             open ? (
                                 <Box>
                                     {sections.map(section => (
-                                        <Accordion disableGutters elevation={0}>
+                                        <Accordion disableGutters elevation={0}
+                                            key={section}>
                                             <AccordionSummary
                                                 expandIcon={<ExpandMoreIcon />}
                                                 aria-controls="panel1a-content"
@@ -77,10 +89,32 @@ function PropertiesDrawer({ }) {
                                                 </Typography>
                                             </AccordionSummary>
                                             <AccordionDetails>
-                                                <Typography>
-                                                    Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse
-                                                    malesuada lacus ex, sit amet blandit leo lobortis eget.
-                                                </Typography>
+                                                <FormControl sx={{ m: 0 }} component="fieldset" variant="standard">
+                                                    <FormGroup>
+                                                        <FormControlLabel
+                                                            control={
+                                                                <Checkbox checked={false} onChange={handleChange} name="gilad" />
+                                                            }
+                                                            label="Gilad Gray"
+                                                        />
+                                                        <FormControlLabel
+                                                            control={
+                                                                <Checkbox checked={false} onChange={handleChange} name="jason" />
+                                                            }
+                                                            label="Jason Killian"
+                                                        />
+                                                        <FormControlLabel
+                                                            control={
+                                                                <Checkbox
+                                                                    checked={false}
+                                                                    onChange={handleChange}
+                                                                    name="antoine"
+                                                                />
+                                                            }
+                                                            label="Antoine Llorca"
+                                                        />
+                                                    </FormGroup>
+                                                </FormControl>
                                             </AccordionDetails>
                                         </Accordion>
                                     ))}

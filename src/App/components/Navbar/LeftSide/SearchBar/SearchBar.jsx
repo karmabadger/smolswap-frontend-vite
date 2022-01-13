@@ -64,6 +64,7 @@ export default function ({ }) {
     const [open, setOpen] = useState(false);
 
     const theme = useTheme();
+    const ref = useRef(null);
 
     const handleClick = (event) => {
         setOpen(true);
@@ -72,14 +73,14 @@ export default function ({ }) {
     };
 
     const handleOnClickAway = (e) => {
+        console.log('closing..');
         setOpen(false);
     };
 
-    const ref = useRef(null);
 
-    useEffect(() => {
-        console.log("width", ref.current.offsetWidth);
-    }, [ref]);
+    // useEffect(() => {
+    //     console.log("width", ref.current.offsetWidth);
+    // }, [ref]);
 
 
     const id = open ? 'simple-popper' : undefined;

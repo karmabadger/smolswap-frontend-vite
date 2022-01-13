@@ -8,6 +8,7 @@ import IconButton from '@mui/material/IconButton';
 
 import discord_logo from './logos/discord_logo.svg';
 import twitter_logo from './logos/twitter_logo.svg';
+import email_logo from './logos/email_logo.svg';
 
 
 
@@ -65,18 +66,59 @@ const Footer = () => {
         sx={{ mx: "24px", my: "32px" }}
     >
         <Divider />
-        <Box>
-            <IconButton aria-label="delete">
-                <img src={twitter_logo} alt="discord_logo" />
-            </IconButton>
-            <IconButton aria-label="delete">
-                <img src={discord_logo} alt="discord_logo" />
-            </IconButton>
+        <Box
+            sx={{
+                my: "54px",
+                display: "flex",
+                flexDirection: "row",
+            }}>
 
-            <FormControlLabel
-                control={<MaterialUISwitch sx={{ m: 1 }} />}
-                label=""
-            />
+            <Box sx={{
+                flexGrow: 0,
+                width: "50px",
+            }}>
+
+            </Box>
+
+            <Box
+                sx={{
+                    flexGrow: 3,
+                    display: "flex",
+                    flexDirection: "row",
+                    alignContent: "center",
+                    alignItems: "center",
+                    justifyContent: 'center',
+                    gap: "24px",
+                }}>
+                <Box>
+                    <IconButton aria-label="twitter-logo">
+                        <img src={twitter_logo} alt="twitter_logo" />
+                    </IconButton>
+                </Box>
+                <Box>
+                    <IconButton aria-label="discord-logo">
+                        <img src={discord_logo} alt="discord_logo" />
+                    </IconButton>
+                </Box>
+                <Box>
+                    <IconButton aria-label="email-logo">
+                        <img src={email_logo} alt="email_logo" />
+                    </IconButton>
+                </Box>
+            </Box>
+
+            <Box
+                sx={{
+                    flexGrow: 0,
+                    width: "50px",
+                    // alignContent: "center",
+                    // alignItems: "center",
+                }}>
+                <FormControlLabel
+                    control={<MaterialUISwitch sx={{ m: 1 }} />}
+                    label=""
+                />
+            </Box>
 
         </Box>
     </Box>

@@ -40,16 +40,16 @@ const web3Modal = new Web3Modal({
     providerOptions // required
 });
 
-const handleConnect = async () => {
-    const instance = await web3Modal.connect();
+// const handleConnect = async () => {
+//     const instance = await web3Modal.connect();
 
-    const provider = new ethers.providers.Web3Provider(instance);
-    const signer = provider.getSigner();
+//     const provider = new ethers.providers.Web3Provider(instance);
+//     const signer = provider.getSigner();
 
-    console.log(signer, await signer.getAddress());
+//     console.log(signer, await signer.getAddress());
 
-    return signer;
-}
+//     return signer;
+// }
 
 
-export { web3Modal, handleConnect, providerOptions, infuraId };
+export { web3Modal, providerOptions, infuraId };

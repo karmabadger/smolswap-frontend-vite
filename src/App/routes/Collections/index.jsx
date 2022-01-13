@@ -37,7 +37,8 @@ import CardGrid from './CardGrid/CardGrid';
 import PropertiesDrawer from './Drawer/PropertiesDrawer';
 
 
-const drawerWidth = 296;
+const drawerWidth = 330;
+const drawerMinWidth = 38;
 
 const Collections = (props) => {
     const theme = useTheme();
@@ -45,16 +46,7 @@ const Collections = (props) => {
         console.log(theme);
     }
 
-    // const [open, setOpen] = useState(false);
-
-    // const handleDrawerOpen = () => {
-    //     setOpen(true);
-    // };
-
-    // const handleDrawerClose = () => {
-    //     console.log("handleDrawerClose", open);
-    //     setOpen(false);
-    // };
+    const [searchList, setSearchList] = useState([]);
 
     return (
         <Box id="collections-main-page" sx={{ padding: "0px", mx: "24px" }}>
@@ -64,11 +56,12 @@ const Collections = (props) => {
 
             <Box id="collection-main-box" sx={{ marginTop: "32px", mx: "0px", display: "flex", flexDirection: "row" }}>
 
-                <PropertiesDrawer />
+                <PropertiesDrawer drawerWidth={drawerWidth} drawerMinWidth={drawerMinWidth} />
+
                 <Box id="collection-main-right-box" sx={{ flexGrow: "1", marginLeft: "40px", }}>
                     <Box id="collection-grid-top-box" sx={{ display: "flex", flexDirection: "row", gap: "24px" }}>
                         <Box id="collection-search-box" sx={{ minWidth: "200px", flexGrow: "4" }}>
-                            <SearchBar />
+                            <SearchBar searchList={searchList} setSearchList={setSearchList} />
                         </Box>
                         <Box id="collection-sort-box" sx={{ width: "220px", minWidth: "100px", flexGrow: "1" }}>
                             <SortSelect />
@@ -83,11 +76,20 @@ const Collections = (props) => {
                                 1234 results
                             </Typography>
                         </Box>
-                        <Box id="search-chips-box" sx={{ display: "flex", flexDirection: "row", gap: "8px" }}>
-                            <Chip label="Deletable" color="secondary" onDelete={() => { console.info('You clicked the delete icon.'); }} />
-                            <Chip label="Deletable" color="secondary" onDelete={() => { console.info('You clicked the delete icon.'); }} />
-                            <Chip label="Deletable" color="secondary" onDelete={() => { console.info('You clicked the delete icon.'); }} />
-                        </Box>
+                        {
+                            searchList && searchList.length !== 0 &&
+                            (
+
+                                <Box id="search-chips-box" sx={{ display: "flex", flexDirection: "row", gap: "8px" }}>
+                                    {searchList.map((item, index) => {
+                                        return (
+                                            <Chip key={index} label={item} color="secondary" onDelete={() => { setSearchList(searchList.filter((value) => { value != item })) }} />
+                                        )
+                                    })
+                                    }
+                                </Box>
+                            )
+                        }
                     </Box>
                     <Box id="collection-grid-main-box">
                         <CardGrid />

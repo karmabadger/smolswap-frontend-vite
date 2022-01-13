@@ -22,7 +22,7 @@ function renderRow(props) {
 
     return (
         <ListItem
-            // style={style} 
+            style={style} 
             sx={{
                 width: '478px',
             }}

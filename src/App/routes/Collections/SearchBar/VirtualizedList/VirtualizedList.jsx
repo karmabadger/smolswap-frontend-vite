@@ -40,7 +40,7 @@ function VirtualizedList() {
                 height={400}
                 width="100%"
                 itemSize={getItemSize}
-                itemCount={200}
+                itemCount={0}
             // overscanCount={5}
             >
                 {renderRow}
