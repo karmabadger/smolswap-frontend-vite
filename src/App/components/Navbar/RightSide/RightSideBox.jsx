@@ -12,6 +12,7 @@ const RightSideBox = () => {
             display: 'flex',
             flexDirection: 'row-reverse',
             // bgcolor: 'background.paper',
+            alignItems: 'center',
             borderRadius: 1,
         }}>
             <ConnectButton />

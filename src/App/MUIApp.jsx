@@ -5,17 +5,21 @@ import { createTheme, styled, useTheme, alpha } from '@mui/material/styles';
 import CssBaseline from '@mui/material/CssBaseline';
 import Button from '@mui/material/Button';
 import Toolbar from '@mui/material/Toolbar';
+import Box from '@mui/material/Box';
 
 import { handleConnect } from '../utils/wallet/web3wallet'
 
 import WalletContext from './components/context/WalletContext/WalletContext'
 import CartContext from './components/context/CartContext/CartContext'
 
+import Divider from '@mui/material/Divider';
+
 import { Routes, Route, Link, Navigate } from "react-router-dom";
 import Collections from './routes/Collections'
 import Checkout from './routes/Checkout'
 
 import Navbar from './components/Navbar/Navbar'
+import Footer from './components/Footer/Footer';
 
 
 function MUIApp({ inputTheme }) {
@@ -51,7 +55,10 @@ function MUIApp({ inputTheme }) {
                 </Route>
                 <Route path="/checkout" element={<Checkout />} />
             </Routes>
-        </div>
+
+            <Footer />
+
+        </div >
     )
 }
 
