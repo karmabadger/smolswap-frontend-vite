@@ -1,24 +1,17 @@
-import * as React from 'react';
+import { useState } from 'react';
 import Box from '@mui/material/Box';
 import InputLabel from '@mui/material/InputLabel';
 import MenuItem from '@mui/material/MenuItem';
 import FormControl from '@mui/material/FormControl';
 import Select from '@mui/material/Select';
 
+import { SizeSelectOptions } from './SizeSelectOptions';
 
-
-export function SizeSelect() {
-    const sortOptions = [
-        "S",
-        "M",
-        "L",
-    ];
-    const [sortOption, setSortOption] = React.useState(sortOptions[0]);
+export function SizeSelect({ cardSize, setCardSize }) {
 
     const handleChange = (event) => {
-        setSortOption(event.target.value);
+        setCardSize(event.target.value);
     };
-
 
     return (
         <Box sx={{ width: "100%" }}>
@@ -27,13 +20,13 @@ export function SizeSelect() {
                 <Select
                     labelId="demo-simple-select-label"
                     id="demo-simple-select"
-                    value={sortOption}
+                    value={cardSize}
                     label="Size"
                     onChange={handleChange}
                 // size="small"
                 >
 
-                    {sortOptions.map((option, index) => {
+                    {SizeSelectOptions.map((option, index) => {
                         return (
                             <MenuItem key={index} value={option}>{option}</MenuItem>
                         )

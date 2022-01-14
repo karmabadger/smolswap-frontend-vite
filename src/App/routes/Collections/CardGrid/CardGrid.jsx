@@ -15,23 +15,21 @@ const Cell = ({ columnIndex, rowIndex, style }) => {
     );
 }
 
-const COLUMN_SIZE = 5;
-
-
-const CardGrid = () => {
+const CardGrid = ({ gridWidth, columnSize, cardWidthWithMargin, cardHeightWithMargin, cardSize }) => {
     const [count, setCount] = useState(20);
+
+    const rowCount = (columnSize != 0) ? Math.ceil(count / columnSize) : 1;
     return (
         <Box sx={{ width: "100%" }}>
             <Grid
                 style={{ width: '100%' }}
                 // onItemsRendered={this.onItemsRendered(onItemsRendered)}
-                columnCount={COLUMN_SIZE}
-                columnWidth={270}
+                columnCount={columnSize}
+                columnWidth={cardWidthWithMargin}
                 height={1350}
-                rowCount={Math.ceil(count / COLUMN_SIZE)}
-                rowHeight={450}
-                width={1024}
-            // ref={ref}
+                rowCount={rowCount}
+                rowHeight={cardHeightWithMargin}
+                width={gridWidth}
             >
                 {Cell}
             </Grid>

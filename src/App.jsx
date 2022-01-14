@@ -13,14 +13,15 @@ import CartContextProvider from './App/components/context/CartContext/CartContex
 
 function App() {
     const [signer, setSigner] = useState(null);
+    const [themeType, setThemeType] = useState('light');
 
     return (
-        <ThemeProvider theme={theme}>
+        <ThemeProvider theme={theme(themeType)}>
             <div className="App">
                 <WalletContextProvider web3Modal={web3Modal} signer={signer} setSigner={setSigner}
                     childrenEl={
                         <CartContextProvider childrenEl={
-                            <MUIApp inputTheme={theme} />
+                            <MUIApp themeType={themeType} setThemeType={setThemeType} />
                         } />
                     } />
             </div>

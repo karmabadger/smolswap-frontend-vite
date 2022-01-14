@@ -61,7 +61,13 @@ const MaterialUISwitch = styled(Switch)(({ theme }) => ({
 
 
 
-const Footer = () => {
+const Footer = ({ themeType, setThemeType }) => {
+
+    const handleSwitchChange = (event) => {
+        console.log("handleSwitchChange", event.target.checked);
+        setThemeType(event.target.checked ? 'dark' : 'light');
+    };
+
     return (<Box id="footer-box"
         sx={{ mx: "24px", my: "32px" }}
     >
@@ -117,6 +123,7 @@ const Footer = () => {
                 <FormControlLabel
                     control={<MaterialUISwitch sx={{ m: 1 }} />}
                     label=""
+                    onChange={handleSwitchChange}
                 />
             </Box>
 

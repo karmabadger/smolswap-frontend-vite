@@ -29,12 +29,15 @@ import FormControlLabel from '@mui/material/FormControlLabel';
 import FormHelperText from '@mui/material/FormHelperText';
 import Checkbox from '@mui/material/Checkbox';
 
+import Button from '@mui/material/Button';
 
 
+import PropertySection from './PropertySection/PropertySection';
 
-function PropertiesDrawer({ drawerWidth, drawerMinWidth }) {
+
+function PropertiesDrawer({ drawerWidth, drawerMinWidth, open, setOpen }) {
     // const theme = useTheme();
-    const [open, setOpen] = useState(false);
+
 
     const handleDrawerOpen = () => {
         setOpen(true);
@@ -45,15 +48,9 @@ function PropertiesDrawer({ drawerWidth, drawerMinWidth }) {
         setOpen(false);
     };
 
-    const handleChange = (event) => {
-        // setState({
-        //     ...state,
-        //     [event.target.name]: event.target.checked,
-        // });
-    };
 
     const sections = [
-        1, 2, 3, 4, 5, 6
+        'Property', 'Property', 'Property', 'Property', 'Property', 'Property',
     ];
 
     return (
@@ -76,48 +73,29 @@ function PropertiesDrawer({ drawerWidth, drawerMinWidth }) {
                         {
                             open ? (
                                 <Box>
-                                    {sections.map(section => (
-                                        <Accordion disableGutters elevation={0}
-                                            key={section}>
-                                            <AccordionSummary
-                                                expandIcon={<ExpandMoreIcon />}
-                                                aria-controls="panel1a-content"
-                                                id="panel1a-header"
-                                            >
-                                                <Typography sx={{ flexShrink: 0 }}>
-                                                    General settings
-                                                </Typography>
-                                            </AccordionSummary>
-                                            <AccordionDetails>
-                                                <FormControl sx={{ m: 0 }} component="fieldset" variant="standard">
-                                                    <FormGroup>
-                                                        <FormControlLabel
-                                                            control={
-                                                                <Checkbox checked={false} onChange={handleChange} name="gilad" />
-                                                            }
-                                                            label="Gilad Gray"
-                                                        />
-                                                        <FormControlLabel
-                                                            control={
-                                                                <Checkbox checked={false} onChange={handleChange} name="jason" />
-                                                            }
-                                                            label="Jason Killian"
-                                                        />
-                                                        <FormControlLabel
-                                                            control={
-                                                                <Checkbox
-                                                                    checked={false}
-                                                                    onChange={handleChange}
-                                                                    name="antoine"
-                                                                />
-                                                            }
-                                                            label="Antoine Llorca"
-                                                        />
-                                                    </FormGroup>
-                                                </FormControl>
-                                            </AccordionDetails>
-                                        </Accordion>
-                                    ))}
+                                    <Box
+                                        sx={{
+                                            // marginBottom: "16px",
+                                        }}>
+                                        {sections.map((section, index) => (
+                                            <PropertySection key={index} section={section} />
+                                        ))}
+                                    </Box>
+                                    <Divider />
+
+                                    <Box
+                                        sx={{
+                                            marginTop: "24px",
+                                            display: "flex",
+                                            justifyContent: "center",
+                                            alignItems: "center",
+                                            width: "100%",
+                                        }}>
+                                        <Button size="large"
+                                            sx={{
+                                                width: "90%",
+                                            }} variant="contained">Clear All</Button>
+                                    </Box>
                                 </Box>
                             ) : (
                                 null)

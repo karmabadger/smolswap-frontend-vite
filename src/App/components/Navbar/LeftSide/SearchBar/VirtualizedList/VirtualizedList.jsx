@@ -22,13 +22,17 @@ function renderRow(props) {
 
     return (
         <ListItem
-            style={style} 
+            style={style}
             sx={{
                 width: '478px',
             }}
             key={index} component="div" disablePadding>
             <ListItemButton>
-                <ListItemText primary={`Item ${index + 1}`} />
+                <ListItemText
+                    sx={{
+                        px: '32px',
+                    }}
+                    primary={`Item ${index + 1}`} />
             </ListItemButton>
         </ListItem>
     );

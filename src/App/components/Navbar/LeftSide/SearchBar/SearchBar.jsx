@@ -73,7 +73,7 @@ export default function ({ }) {
     };
 
     const handleOnClickAway = (e) => {
-        console.log('closing..');
+        // console.log('closing..');
         setOpen(false);
     };
 

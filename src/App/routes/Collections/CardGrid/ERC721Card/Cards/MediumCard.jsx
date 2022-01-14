@@ -1,4 +1,4 @@
-import * as React from "react";
+import { useState, useEffect } from 'react';
 import Card from "@mui/material/Card";
 import CardContent from "@mui/material/CardContent";
 import CardMedia from "@mui/material/CardMedia";
@@ -20,35 +20,22 @@ import ModalUnstyled from "@mui/base/ModalUnstyled";
 
 import Box from "@mui/material/Box";
 
+import useWindowDimensions from "@/hooks/useWindowDimentions";
+
 import smol from "../../../../../../../__mock_data__/img/smol.png";
 
 import ERC721Modal from "./Modals/ERC721Modal";
 
 export default function ImgMediaCard({ added, handleAdd, handleRemove }) {
-    const [open, setOpen] = React.useState(false);
-    const [anchorEl, setAnchorEl] = React.useState(null);
+    const [open, setOpen] = useState(false);
+    const [anchorEl, setAnchorEl] = useState(null);
 
-    const [scrollState, setScrollState] = React.useState(true);
 
-    // const listenToScroll = () => {
-    //     const winScroll =
-    //         document.body.scrollTop || document.documentElement.scrollTop
 
-    //     // const height =
-    //     //     document.documentElement.scrollHeight -
-    //     //     document.documentElement.clientHeight
-
-    //     const scrolled = winScroll
-
-    //     setScrollState(scrolled);
-    //     return scrolled;
-    // }
 
     const handleOpen = (event) => {
         setOpen(true);
         setAnchorEl(document.body);
-        // listenToScroll();
-        // console.log("scroll", listenToScroll());
     }
     const handleClose = () => setOpen(false);
 
@@ -129,6 +116,7 @@ export default function ImgMediaCard({ added, handleAdd, handleRemove }) {
                             p: "0px",
                             height: "22px"
                         }}
+                        onClick={handleOpen}
                     >
                         See details
                     </Button>
@@ -142,7 +130,7 @@ export default function ImgMediaCard({ added, handleAdd, handleRemove }) {
                         aria-label="add-to-cart"
                     >
                         {
-                            added ? <RemoveShoppingCartIcon onClick={handleRemove} fontSize="inherit" color="primary" /> : <AddShoppingCartIcon onClick={handleAdd} fontSize="inherit" color="primary" />
+                            added ? <RemoveShoppingCartIcon size="large" onClick={handleRemove} fontSize="inherit" color="primary" /> : <AddShoppingCartIcon size="large" onClick={handleAdd} fontSize="inherit" color="primary" />
                         }
                     </IconButton>
                 </Box>

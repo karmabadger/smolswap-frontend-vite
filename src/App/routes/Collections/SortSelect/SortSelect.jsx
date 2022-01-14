@@ -1,24 +1,17 @@
-import * as React from 'react';
+import { useState } from 'react';
 import Box from '@mui/material/Box';
 import InputLabel from '@mui/material/InputLabel';
 import MenuItem from '@mui/material/MenuItem';
 import FormControl from '@mui/material/FormControl';
 import Select from '@mui/material/Select';
 
+import SortSelectOptions from './SortSelectOptions';
 
-
-export function SortSelect() {
-    const sortOptions = [
-        "Price: Low to High",
-        "Price: High to Low",
-        "Newest to Oldest",
-    ];
-    const [sortOption, setSortOption] = React.useState(sortOptions[0]);
+export function SortSelect({ sortBy, setSortBy }) {
 
     const handleChange = (event) => {
-        setSortOption(event.target.value);
+        setSortBy(event.target.value);
     };
-
 
     return (
         <Box sx={{ width: "100%" }}>
@@ -27,13 +20,13 @@ export function SortSelect() {
                 <Select
                     labelId="demo-simple-select-label"
                     id="demo-simple-select"
-                    value={sortOption}
+                    value={sortBy}
                     label="SortBy"
                     onChange={handleChange}
                 // size="small"
                 >
 
-                    {sortOptions.map((option, index) => {
+                    {SortSelectOptions.map((option, index) => {
                         return (
                             <MenuItem key={index} value={option}>{option}</MenuItem>
                         )

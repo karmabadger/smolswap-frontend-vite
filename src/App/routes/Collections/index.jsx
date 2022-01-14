@@ -30,44 +30,91 @@ import MailIcon from '@mui/icons-material/Mail';
 import MenuIcon from '@mui/icons-material/Menu';
 
 import TopBox from './TopBox/TopBox';
-import SortSelect from './SortBar/SortSelect';
+import SortSelect from './SortSelect/SortSelect';
 import SizeSelect from './SizeSelect/SizeSelect';
 import SearchBar from './SearchBar/SearchBar';
 import CardGrid from './CardGrid/CardGrid';
 import PropertiesDrawer from './Drawer/PropertiesDrawer';
 
+import SortSelectOptions from './SortSelect/SortSelectOptions';
+import { SizeSelectOptions, CardSizes } from './SizeSelect/SizeSelectOptions';
+
+import useWindowDimensions from "@/hooks/useWindowDimentions";
 
 const drawerWidth = 330;
 const drawerMinWidth = 38;
+const pageMX = 24;
+const gridMLeft = 32;
+const gridScrollBarWidth = 16.8;
+const cardMinMarginX = 14;
+const cardMinMarginY = 14;
 
-const Collections = (props) => {
-    const theme = useTheme();
-    const printTheme = () => {
-        console.log(theme);
+function calculateGridSize(windowWidth, cardSize, drawerOn = false) {
+
+    let gridWidth = windowWidth - pageMX - pageMX - gridMLeft - gridScrollBarWidth;
+
+    if (drawerOn) {
+        gridWidth -= drawerWidth;
+    } else {
+        gridWidth -= drawerMinWidth;
     }
 
+    let columnSize = Math.floor(gridWidth / (CardSizes[cardSize].widthPixel + cardMinMarginX));
+    let cardWidthWithMargin = (columnSize != 0) ? gridWidth / columnSize : CardSizes[cardSize].widthPixel;
+    if (cardWidthWithMargin < CardSizes[cardSize].widthPixel + cardMinMarginX) {
+        cardWidthWithMargin = CardSizes[cardSize].widthPixel;
+        columnSize = 1;
+    } else {
+        cardWidthWithMargin = CardSizes[cardSize].widthPixel + cardMinMarginX;
+    }
+    const cardHeightWithMargin = CardSizes[cardSize].heightPixel + cardMinMarginY;
+    return { gridWidth, columnSize, cardWidthWithMargin, cardHeightWithMargin };
+}
+
+
+
+const Collections = ({ }) => {
+    const theme = useTheme();
+
+    const { height, width } = useWindowDimensions();
+
+    // for search bar and chips
     const [searchList, setSearchList] = useState([]);
 
+    // for sort by selectoion
+    const [sortBy, setSortBy] = useState(SortSelectOptions[0]);
+
+    // for Card size selection
+    const [cardSize, setCardSize] = useState(SizeSelectOptions[1]);
+
+    // for drawer
+    const [open, setOpen] = useState(false);
+
+    const { gridWidth, columnSize, cardWidthWithMargin, cardHeightWithMargin } = calculateGridSize(width, cardSize, open);
+    // console.log('gridWidth: ', gridWidth, 'columnSize: ', columnSize, "width: ", width, "cardWidthWithMargin: ", cardWidthWithMargin, "cardHeightWithMargin: ", cardHeightWithMargin);
+
     return (
-        <Box id="collections-main-page" sx={{ padding: "0px", mx: "24px" }}>
+        <Box id="collections-main-page" sx={{ padding: "0px", mx: `${pageMX}px` }}>
 
             <TopBox />
             <Divider ></Divider>
 
             <Box id="collection-main-box" sx={{ marginTop: "32px", mx: "0px", display: "flex", flexDirection: "row" }}>
 
-                <PropertiesDrawer drawerWidth={drawerWidth} drawerMinWidth={drawerMinWidth} />
+                <PropertiesDrawer drawerWidth={drawerWidth} drawerMinWidth={drawerMinWidth} open={open} setOpen={setOpen} />
 
-                <Box id="collection-main-right-box" sx={{ flexGrow: "1", marginLeft: "40px", }}>
-                    <Box id="collection-grid-top-box" sx={{ display: "flex", flexDirection: "row", gap: "24px" }}>
-                        <Box id="collection-search-box" sx={{ minWidth: "200px", flexGrow: "4" }}>
+                <Box id="collection-main-right-box" sx={{ flexGrow: "1", marginLeft: `${gridMLeft}px`, }}>
+                    <Box id="collection-grid-top-box" sx={{ display: "flex", flexDirection: "row", alignContent: "stretch", flexWrap: "wrap", gap: "24px" }}>
+                        <Box id="collection-search-box" sx={{ minWidth: "200px", flexGrow: "10" }}>
                             <SearchBar searchList={searchList} setSearchList={setSearchList} />
                         </Box>
-                        <Box id="collection-sort-box" sx={{ width: "220px", minWidth: "100px", flexGrow: "1" }}>
-                            <SortSelect />
+
+                        <Box id="collection-sort-box" sx={{ width: "220px", minWidth: "100px", flexGrow: "3" }}>
+                            <SortSelect sortBy={sortBy} setSortBy={setSortBy} />
                         </Box>
-                        <Box id="collection-size-box" sx={{ width: "70px", minWidth: "50px", flexGrow: "0" }}>
-                            <SizeSelect />
+
+                        <Box id="collection-size-box" sx={{ width: "80px", minWidth: "60px", flexGrow: "1" }}>
+                            <SizeSelect cardSize={cardSize} setCardSize={setCardSize} />
                         </Box>
                     </Box>
                     <Box id="grid-info" sx={{ my: "24px", display: "flex", flexDirection: "column", gap: "12px" }}>
@@ -92,7 +139,7 @@ const Collections = (props) => {
                         }
                     </Box>
                     <Box id="collection-grid-main-box">
-                        <CardGrid />
+                        <CardGrid gridWidth={gridWidth} columnSize={columnSize} cardWidthWithMargin={cardWidthWithMargin} cardHeightWithMargin={cardHeightWithMargin} cardSize={cardSize} />
                     </Box>
                 </Box>
             </Box>

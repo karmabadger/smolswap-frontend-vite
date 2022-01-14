@@ -53,16 +53,10 @@ const Backdrop = styled("div")`
   -webkit-tap-highlight-color: transparent;
 `;
 
-const ERC721Modal = ({ open, handleClose, id, anchorEl }) => {
+const ERC1155Modal = ({ open, id, anchorEl }) => {
 
     // const { height, width } = useWindowDimensions();
 
-    // const scrollState = -(document.body.scrollTop || document.documentElement.scrollTop)
-
-    // const height =
-    //     document.documentElement.scrollHeight -
-    //     document.documentElement.clientHeight
-    // console.log("scrollState", scrollState);
     return (
         <Popper id={id} open={open}
 
@@ -162,4 +156,4 @@ const ERC721Modal = ({ open, handleClose, id, anchorEl }) => {
     );
 }
 
-export default ERC721Modal;
+export default ERC1155Modal;

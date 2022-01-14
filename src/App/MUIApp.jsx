@@ -12,6 +12,7 @@ import Box from '@mui/material/Box';
 import WalletContext from './components/context/WalletContext/WalletContext'
 import CartContext from './components/context/CartContext/CartContext'
 
+// import CssBaseline from '@mui/material/CssBaseline';
 import Divider from '@mui/material/Divider';
 
 import { Routes, Route, Link, Navigate } from "react-router-dom";
@@ -21,11 +22,12 @@ import Checkout from './routes/Checkout'
 import Navbar from './components/Navbar/Navbar'
 import Footer from './components/Footer/Footer';
 
-function MUIApp({ inputTheme }) {
 
-    const { signer, setSigner } = useContext(WalletContext);
+function MUIApp({ themeType, setThemeType }) {
 
-    const theme = useTheme()
+    // const { signer, setSigner } = useContext(WalletContext);
+
+    // const theme = useTheme()
 
     const cartContextObj = useContext(CartContext);
 
@@ -34,17 +36,18 @@ function MUIApp({ inputTheme }) {
     //     setSigner(newSigner);
     // }
 
-    const printSigner = () => {
-        console.log(signer);
-        console.log(cartContextObj);
-    }
+    // const printSigner = () => {
+    //     console.log(signer);
+    //     console.log(cartContextObj);
+    // }
 
-    const printTheme = () => {
-        console.log(theme, inputTheme);
-    }
+    // const printTheme = () => {
+    //     console.log(theme, inputTheme);
+    // }
 
     return (
         <div className="MUIApp">
+            <CssBaseline />
             <Navbar />
             <Toolbar />
             <Routes>
@@ -56,7 +59,7 @@ function MUIApp({ inputTheme }) {
                 {/* <Route path="/*" element={} /> */}
             </Routes>
 
-            <Footer />
+            <Footer themeType={themeType} setThemeType={setThemeType} />
 
         </div >
     )

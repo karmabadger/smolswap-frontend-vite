@@ -1,13 +1,14 @@
 import { defineConfig } from 'vite'
 import react from '@vitejs/plugin-react'
-import polyfillNode from 'rollup-plugin-polyfill-node'
+// import polyfillNode from 'rollup-plugin-polyfill-node'
 
+import path from 'path'
 
 // https://vitejs.dev/config/
 export default defineConfig({
   rollupOptions: {
     plugins: [
-      polyfillNode(),
+      // polyfillNode(),
     ],
   },
   define: {
@@ -18,7 +19,7 @@ export default defineConfig({
   },
   plugins: [
     react(),
-    polyfillNode()
+    // polyfillNode()
   ],
   optimizeDeps: {
     allowNodeBuiltins: [],
@@ -29,8 +30,13 @@ export default defineConfig({
   build: {
     rollupOptions: {
       plugins: [
-        polyfillNode(),
+        // polyfillNode(),
       ],
     },
+  },
+  resolve: {
+    alias: [
+      { find: '@', replacement: path.resolve(__dirname, 'src') },
+    ],
   },
 })

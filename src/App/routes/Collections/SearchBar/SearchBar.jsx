@@ -30,7 +30,7 @@ const SearchBar = ({ searchList, setSearchList }) => {
         setOpen(true);
     };
     const handleClickAway = () => {
-        console.log('closing..');
+        // console.log('closing..');
         setOpen(false);
     };
 
