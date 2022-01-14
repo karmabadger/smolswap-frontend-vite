@@ -1,6 +1,6 @@
 import { useState } from 'react'
-import logo from './logo.svg'
-import './App.css'
+// import logo from './logo.svg'
+// import './App.css'
 
 import { ethers } from "ethers";
 import Web3Modal from "web3modal";

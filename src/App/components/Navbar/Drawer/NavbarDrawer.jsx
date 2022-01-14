@@ -11,7 +11,10 @@ import ListItem from "@mui/material/ListItem";
 import ListItemIcon from "@mui/material/ListItemIcon";
 import ListItemText from "@mui/material/ListItemText";
 import InboxIcon from "@mui/icons-material/MoveToInbox";
+import Typography from "@mui/material/Typography";
 
+// import { Link } from "react-router-dom";
+import Link from '@mui/material/Link';
 
 const DrawerHeader = styled("div")(({ theme }) => ({
     display: "flex",
@@ -47,25 +50,17 @@ const NavbarDrawer = ({ open, handleDrawerClose, drawerWidth }) => {
                 )}
             </IconButton>
         </DrawerHeader>
-        <Divider />
         <List>
-            {["Inbox", "Starred", "Send email", "Drafts"].map((text, index) => (
-                <ListItem button key={text}>
-                    <ListItemIcon>
-                        {index % 2 === 0 ? <InboxIcon /> : <MailIcon />}
-                    </ListItemIcon>
-                    <ListItemText primary={text} />
-                </ListItem>
-            ))}
-        </List>
-        <Divider />
-        <List>
-            {["All mail", "Trash", "Spam"].map((text, index) => (
-                <ListItem button key={text}>
-                    <ListItemIcon>
-                        {index % 2 === 0 ? <InboxIcon /> : <MailIcon />}
-                    </ListItemIcon>
-                    <ListItemText primary={text} />
+            {["Extra Life", "Keys", "Legions", "Legions Genesis"].map((text, index) => (
+                <ListItem
+                    button
+                    sx={{ px: "24px" }}
+                    key={text}>
+                    <Link href="/#" underline="none" color="text.primary">
+                        <Typography variant="h6">
+                            {text}
+                        </Typography>
+                    </Link>
                 </ListItem>
             ))}
         </List>

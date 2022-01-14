@@ -4,7 +4,7 @@ import Box from '@mui/material/Box';
 
 import ConnectButton from './Buttons/ConnectButton';
 import CheckoutButton from './Buttons/CheckoutButton';
-import CartButton from './Buttons/Cart';
+import CartButton from './Buttons/CartButton';
 
 const RightSideBox = () => {
     return (
@@ -12,6 +12,7 @@ const RightSideBox = () => {
             display: 'flex',
             flexDirection: 'row-reverse',
             // bgcolor: 'background.paper',
+            alignItems: 'center',
             borderRadius: 1,
         }}>
             <ConnectButton />
